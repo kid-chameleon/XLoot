@@ -500,6 +500,15 @@ function addon:OnEnable() -- Construct addon option tables here
 		{ "MONOCHROME", "MONOCHROME" }
 	}
 
+	local statusbars = {
+		{ [[Interface\AddOns\XLoot\Textures\bar]], "XLoot" },
+	}
+	if LSM then
+		for name, tex in pairs(LSM:HashTable("statusbar")) do
+			table.insert(statusbars, { tex, name })
+		end
+	end
+
 	-------------------------------------------------------------------------------
 	-- Module configs
 
@@ -635,6 +644,9 @@ function addon:OnEnable() -- Construct addon option tables here
 				{ "roll_offset", "range", -25, 25, 1, name = L.offset, subtable = "roll_anchor", subkey = "offset" },
 				{ "roll_button_size", "range", 16, 48, 1 },
 
+			}},
+			{ "timer_bar", "group", {
+				{ "roll_bar_texture", statusbars },
 			}},
 			{ "extra_info", "group", {
 				{ "equip_prefix" },

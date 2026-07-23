@@ -90,6 +90,8 @@ local defaults = {
 		roll_button_size = 28,
 		roll_width = 325,
 
+		roll_bar_texture = [[Interface\AddOns\XLoot\Textures\bar]],
+
 		font = STANDARD_TEXT_FONT,
 		font_flag = "OUTLINE",
 
@@ -1307,7 +1309,7 @@ do
 		bar:SetPoint('TOPRIGHT', -pad - 3, -pad - 3)
 		bar:SetPoint('BOTTOMRIGHT', -pad - 3, pad + 3)
 		bar:SetPoint('LEFT', icon_frame, 'RIGHT', -pad, 0)
-		bar:SetStatusBarTexture(skin.bar_texture)
+		bar:SetStatusBarTexture(opt.roll_bar_texture)
 		bar:SetScript('OnUpdate', self.OnBarUpdate)
 		bar.parent = frame
 		frame.bar = bar
@@ -1376,6 +1378,7 @@ do
 		self:SetWidth(opt.roll_width)
 
 		-- Status bar is reskinned with SkinUpdate
+		self.bar:SetStatusBarTexture(opt.roll_bar_texture)
 
 		-- Drop any urgency tint so turning the option off mid-roll restores the quality fill and highlight border.
 		if self.bar.base_r then
@@ -1415,7 +1418,6 @@ function addon:SkinUpdate()
 		bar:SetPoint('TOPRIGHT', n, n)
 		bar:SetPoint('BOTTOMRIGHT', n, p)
 		bar:SetPoint('LEFT', bar.parent.icon_frame, 'RIGHT', -padding, 0)
-		bar:SetStatusBarTexture(skin.bar_texture)
 		local link = bar.parent.link
 		if link and not (issecret and issecret(link)) then
 			local r, g, b = C_Item.GetItemQualityColor(select(3, GetItemInfo(link)))
